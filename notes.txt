@@ -1,0 +1,1 @@
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhdGR1Y2siLCJpYXQiOjE2OTUyMzIyMjB9.frZrJaNcqdqKXW71Jw6UVwFMaA51F7UIAtwvyIuSZzU","user":{"createdAt":"2023-09-20T17:50:20.133Z","favorites":[],"name":"Catduck","stories":[],"updatedAt":"2023-09-20T17:50:20.133Z","username":"catduck"}}root@Sodium:~# 
