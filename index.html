@@ -41,8 +41,11 @@
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
-    <a class="nav-link" id="nav-submit-story" href="#"><small>Submit</small></a>
-
+  <div class="nav-center">
+    <a class="nav-center" href="#" id="nav-submit-story">Submit</a> |
+    <a class="nav-center" href="#" id="nav-favorites">Favorites</a> |
+    <a class="nav-center" href="#" id="nav-my-stories">My Stories</a>
+    </div>
   </div>
 </nav>
 
@@ -57,7 +60,7 @@
 
 </section>
 
-<!-- Login and signup forms -->
+<!-- Login | Submit| Signup forms -->
 <section class="account-forms-container container">
 
   <!-- Login form -->
@@ -97,6 +100,19 @@
     <button type="submit">create account</button>
   </form>
 </section>
+
+  <!-- Submit Story Form -->
+  <form action="#" id="submit-story-form" class="submit-story-form hidden" method="post">
+    <label for="create-author">Author</label>
+    <input id="create-author" placeholder="Author Name(s)">
+    <label for="create-title">Title</label>
+    <input id="create-title" placeholder="Title of the story">
+    <label for="create-url">URL</label>
+    <input id="create-url" type="url" placeholder="https://yourfunnystory.com">
+    <button type="submit">Submit</button>
+    <hr>
+  </form>
+
 
 <!-- Library JS & our JS -->
 <script src="https://unpkg.com/jquery"></script>

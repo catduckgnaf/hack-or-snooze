@@ -1,3 +1,5 @@
+/* nav.css */
+
 /* Navigation bar */
 
 nav {
@@ -20,4 +22,10 @@ nav {
 .nav-right {
   margin-left: auto;
   text-align: right;
+}
+
+.nav-center {
+  margin-left: auto;
+  text-align: center;
+  font-weight: bold;
 }

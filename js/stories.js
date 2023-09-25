@@ -35,6 +35,32 @@ function generateStoryMarkup(story) {
     `);
 }
 
+// Define the submitNewStory function
+async function submitNewStory(event) {
+  event.preventDefault(); // Prevent the default form submission behavior
+
+  // Get data from the form fields
+  const author = $("#create-author").val();
+  const title = $("#create-title").val();
+  const url = $("#create-url").val();
+
+  // Create a new story object
+  const newStory = new Story({ author, title, url });
+
+  // Add the new story to the story list
+  await storyList.addStory(currentUser, newStory);
+
+  // Generate HTML markup for the new story
+  const $newStoryMarkup = generateStoryMarkup(newStory);
+
+  // Append the new story's markup to the list of stories on the page
+  $allStoriesList.prepend($newStoryMarkup);
+}
+
+// Attach the submitNewStory function to the form's submit event
+$storyForm.on("submit", submitNewStory);
+
+
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
