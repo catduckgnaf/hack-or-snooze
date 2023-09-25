@@ -4,7 +4,6 @@
 
 In this exercise, you’ll add features to a news-aggregator site (based loosely on a popular one called Hacker News). It will allow users to create accounts, log in, create articles, mark articles as favorites, and more!
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e0c44fe7-34d3-446f-b101-56a2acfff9b2/Untitled.png)
 
 We’ve already built the backend server API, so you’ll focus on learning to use an API and adding features to the front-end Javascript.
 
@@ -73,7 +72,6 @@ Instead, in the beginning, think about *skimming* the codebase first to just s
 
 It can be very helpful to make a pen-and-paper drawing of the names of the important functions and how the call the other functions.
 
-![design.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3e3746d2-f528-4adf-b0b3-85a4a9e0b406/design.jpeg)
 
 ## **Part 2: Creating New Stories**
 
@@ -129,9 +127,6 @@ Allow logged in users to remove a story. Once a story has been deleted, remove i
 
 Restyle the landing and login page to match this mock-up - provided by a designer.
 
-![image.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/07b1b5df-84e0-4d03-bd13-980dc75f6442/image.png)
-
-![image (1).png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9de5cd0c-e87f-4b80-8918-a048aed98a62/image_(1).png)
 
 ## **Further Study**
 
