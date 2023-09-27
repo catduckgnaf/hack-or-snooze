@@ -49,6 +49,41 @@ async function signup(evt) {
   $signupForm.trigger("reset");
 }
 
+// Inside your JavaScript code
+
+// Event handler for favoriting a story
+$allStoriesList.on("click", ".favorite-button", function (evt) {
+  const storyId = $(evt.target).closest("li").attr("id"); // Get the story ID
+  const story = storyList.stories.find(s => s.storyId === storyId);
+
+  // Check if the story is already favorited by the user
+  const isFavorited = currentUser.favorites.some(favorite => favorite.storyId === story.storyId);
+
+  if (isFavorited) {
+    // Story is already favorited, unfavorite it
+    currentUser.removeFavorite(story);
+    $(evt.target).text("Favorite"); // Change button text to "Favorite"
+  } else {
+    // Story is not favorited, favorite it
+    currentUser.addFavorite(story);
+    $(evt.target).text("Unfavorite"); // Change button text to "Unfavorite"
+  }
+});
+
+// Event handler for displaying favorited stories
+$navFavorites.on("click", function () {
+  // Clear the favorites list before populating it
+  const $favoritesList = $("#favorites-list");
+  $favoritesList.empty();
+
+  // Populate the favorites list with user's favorited stories
+  for (const story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    $favoritesList.append($story);
+  }
+});
+
+
 $signupForm.on("submit", signup);
 
 /** Handle click of logout button
@@ -93,6 +128,7 @@ function saveUserCredentialsInLocalStorage() {
   if (currentUser) {
     localStorage.setItem("token", currentUser.loginToken);
     localStorage.setItem("username", currentUser.username);
+    localStorage.setItem("favorites", currentUser.favorites);
   }
 }
 
