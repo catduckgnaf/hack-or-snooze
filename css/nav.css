@@ -1,5 +1,3 @@
-/* nav.css */
-
 /* Navigation bar */
 
 nav {
@@ -24,8 +22,12 @@ nav {
   text-align: right;
 }
 
-.nav-center {
-  margin-left: auto;
-  text-align: center;
-  font-weight: bold;
+
+
+/* ADDED */
+.main-nav-links {
+  margin: 0 10px;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
 }
