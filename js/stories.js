@@ -12,34 +12,14 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
-
-
-
-
-
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
+ * - showDeleteBtn: show delete button?
  *
  * Returns the markup for the story.
  */
-// OLD
-// function generateStoryMarkup(story) {
-//   // console.debug("generateStoryMarkup", story);
 
-//   const hostName = story.getHostName();
-//   return $(`
-//       <li id="${story.storyId}">
-//         <a href="${story.url}" target="a_blank" class="story-link">
-//           ${story.title}
-//         </a>
-//         <small class="story-hostname">(${hostName})</small>
-//         <small class="story-author">by ${story.author}</small>
-//         <small class="story-user">posted by ${story.username}</small>
-//       </li>
-//     `);
-// }
-// NEW
 function generateStoryMarkup(story, showDeleteBtn = false) {
   // console.debug("generateStoryMarkup", story);
 
@@ -84,19 +64,6 @@ function getStarHTML(story, user) {
       </span>`;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
@@ -112,16 +79,6 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
-
-
-
-
-
-
-
-/////
-//ADDED
-///////
 
 /** Handle deleting a story. */
 
@@ -224,13 +181,12 @@ async function toggleStoryFavorite(evt) {
   if ($tgt.hasClass("fas")) {
     // currently a favorite: remove from user's fav list and change star
     await currentUser.removeFavorite(story);
+    $tgt.closest("i").toggleClass("fas far");
   } else {
     // currently not a favorite: do the opposite
     await currentUser.addFavorite(story);
+    $tgt.closest("i").toggleClass("fas far");
   }
-
-  $tgt.closest("i").toggleClass("fas far"); //ANH MAI
-  
 }
 
 $storiesLists.on("click", ".star", toggleStoryFavorite);

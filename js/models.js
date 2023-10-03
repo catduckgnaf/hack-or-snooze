@@ -23,15 +23,10 @@ class Story {
 
   /** Parses hostname out of URL and returns it. */
 
-    getHostName() {
-      // get the full URL of the current page
-      const url = window.location.href;
-      // extract the hostname from the URL
-      const hostname = new URL(url).hostname;
-      return hostname;
-    }
-    
-  
+  getHostName() {
+    // UNIMPLEMENTED: complete this function!
+    return this.url;
+  }
 }
 
 
@@ -78,62 +73,32 @@ class StoryList {
    * Returns the new Story instance
    */
 
+  async addStory(user, newStory) {
+    try {
+      // Make an API request to add the story
+      const response = await axios({
+        url: `${BASE_URL}/stories`,
+        method: "POST",
+        data: {
+          token: user.loginToken,
+          story: newStory,
+        },
+      });
 
-  //ADDED
-  async addStory(user, { title, author, url }) {
-    // UNIMPLEMENTED: complete this function!
-      try {
-        const response = await axios.post(
-          `${BASE_URL}/stories`,
-          { token: user.loginToken, story: { title, author, url } }
-        );
-    
-        const story = new Story(response.data.story);
-    
-        this.stories.unshift(story);
-        user.ownStories.unshift(story);
-    
-        return story;
-      } catch (error) {
-        console.error("Failed to add story:", error);
-        throw error;
-      }
-  }
-///////////
+      // Create a new Story instance from the response data
+      const addedStory = new Story(response.data.story);
 
+      // Add the new story to the current StoryList's stories array
+      this.stories.push(addedStory);
 
-
-
-  /** Removew story from the  API and delete from the story lists.
-   */
-async removeStory(user, storyId) {
-  try {
-    await axios.delete(`${BASE_URL}/stories/${storyId}`, {
-      data: { token: user.loginToken }
-    });
-
-    // Remove the story from the StoryList and the User's ownStories
-    // const index = this.stories.findIndex(story => story.storyId === storyId);
-    // if (index !== -1) {
-    //   this.stories.splice(index, 1);
-    // }
-      this.stories = this.stories.filter(story => story.storyId !== storyId); //ANH MAI
-    // const userIndex = user.ownStories.findIndex(s => s.storyId === storyId);
-    // if (userIndex !== -1) {
-    //   user.ownStories.splice(userIndex, 1);
-    // }
-    user.ownStories = user.ownStories.filter(story => story.storyId !== storyId);//ANH MAI
-
-  } catch (error) {
-    console.error("Failed to remove story:", error);
-    throw error;
+      // Return the new Story instance
+      return addedStory;
+    } catch (error) {
+      console.error("Error adding story: Are you sure you are logged in?", error);
+      throw error;
+    }
   }
 }
-
-}
-
-
-
 
 /******************************************************************************
  * User: a user in the system (only used to represent the current user)
@@ -146,13 +111,13 @@ class User {
    */
 
   constructor({
-                username,
-                name,
-                createdAt,
-                favorites = [],
-                ownStories = []
-              },
-              token) {
+    username,
+    name,
+    createdAt,
+    favorites = [],
+    ownStories = []
+  },
+    token) {
     this.username = username;
     this.name = name;
     this.createdAt = createdAt;
@@ -164,7 +129,9 @@ class User {
     // store the login token on the user so it's easy to find for API calls.
     this.loginToken = token;
   }
-
+  isFavorite(story) {
+    return this.favorites.find (s => s.storyId == story.storyId)
+  }
   /** Register new user in API, make User instance & return it.
    *
    * - username: a new username
@@ -248,52 +215,5 @@ class User {
       console.error("loginViaStoredCredentials failed", err);
       return null;
     }
-  }
-
-
-
-
-
-
-
-//ADDED
-
-  /** Add a story to the list of user favorites and update the API
-   * - story: a Story instance to add to favorites
-   */
-
-  async addFavorite(story) {
-    this.favorites.push(story);
-    await this._addOrRemoveFavorite("add", story)
-  }
-
-  /** Remove a story to the list of user favorites and update the API
-   * - story: the Story instance to remove from favorites
-   */
-
-  async removeFavorite(story) {
-    this.favorites = this.favorites.filter(s => s.storyId !== story.storyId);
-    await this._addOrRemoveFavorite("remove", story);
-  }
-
-  /** Update API with favorite/not-favorite.
-   *   - newState: "add" or "remove"
-   *   - story: Story instance to make favorite / not favorite
-   * */
-
-  async _addOrRemoveFavorite(newState, story) {
-    const method = newState === "add" ? "POST" : "DELETE";
-    const token = this.loginToken;
-    await axios({
-      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
-      method: method,
-      data: { token },
-    });
-  }
-
-  /** Return true/false if given Story instance is a favorite of this user. */
-
-  isFavorite(story) {
-    return this.favorites.some(s => (s.storyId === story.storyId)); //find instead of some - boolean ANH MAI
   }
 }

@@ -97,7 +97,7 @@ function saveUserCredentialsInLocalStorage() {
 }
 
 /******************************************************************************
- * General UI stuff about users
+ * General UI stuff about users & profiles
  */
 
 /** When a user signs up or registers, we want to set up the UI for them:
@@ -107,35 +107,26 @@ function saveUserCredentialsInLocalStorage() {
  * - generate the user profile part of the page
  */
 
-function updateUIOnUserLogin() {
+async function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
 
-  //ADDED
   hidePageComponents();
 
   // re-display stories (so that "favorite" stars can appear)
   putStoriesOnPage();
-  //
-  
   $allStoriesList.show();
 
   updateNavOnLogin();
-  //ADDED
   generateUserProfile();
   $storiesContainer.show()
-  //
 }
 
-
-
-// ADDED
-/** Show "user profile"  */
+/** Show a "user profile" part of page built from the current user's info. */
 
 function generateUserProfile() {
   console.debug("generateUserProfile");
 
-  document.querySelector("#profile-name").textContent = currentUser.name;
-  document.querySelector("#profile-username").textContent = currentUser.username;
-  document.querySelector("#profile-account-date").textContent = currentUser.createdAt.slice(0, 10);
+  $("#profile-name").text(currentUser.name);
+  $("#profile-username").text(currentUser.username);
+  $("#profile-account-date").text(currentUser.createdAt.slice(0, 10));
 }
-

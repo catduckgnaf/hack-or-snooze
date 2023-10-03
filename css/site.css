@@ -3,13 +3,12 @@
 body {
   font-family: Arimo, sans-serif;
   margin: 8px 7.5vw;
-  /* //ADDED// */
   height: 100vh;
-  background-image: radial-gradient(circle, rgb(244, 145, 188) 0%, rgb(138, 182, 231) 100%);
+  background-image: radial-gradient(circle, rgb(238, 174, 202) 0%, rgb(148, 187, 233) 100%);
 }
 
 h1 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 0;
 }
 
@@ -19,7 +18,7 @@ h4 {
 }
 
 h5 {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: lighter;
 }
 
@@ -37,30 +36,21 @@ a:hover {
 
 /* This is the basic box that the main part of the page goes into */
 .container {
-  position:absolute;
-  width: 100vh;
   display: flex;
   flex-direction: column;
   align-self: center;
   background-color: #f6f6ef;
-  /* height:100vh; */
+
+}
+
+.stories-container{
+  height: calc(100vh - 100px);
+  overflow: scroll;
 }
 
 .hidden {
   display: none;
 }
-
-
-/* ADDED */
-.stories-container{
-  height: calc(100vh - 100px);
-  width:100vh;
-  overflow: scroll;
-  padding:10px;
-}
-
-
-
 
 
 /* Forms */
