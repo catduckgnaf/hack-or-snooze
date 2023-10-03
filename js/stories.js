@@ -30,16 +30,14 @@ function generateStoryMarkup(story, showDeleteBtn = false) {
 
   return $(`
       <li id="${story.storyId}">
-        <div>
         ${showDeleteBtn ? getDeleteBtnHTML() : ""}
         ${showStar ? getStarHTML(story, currentUser) : ""}
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
         <small class="story-hostname">(${hostName})</small>
-        <div class="story-author">by ${story.author}</div>
-        <div class="story-user">posted by ${story.username}</div>
-        </div>
+        <small class="story-author">by ${story.author}</small>
+        <small class="story-user">posted by ${story.username}</small>
       </li>
     `);
 }
@@ -107,7 +105,7 @@ async function submitNewStory(evt) {
   const url = $("#create-url").val();
   const author = $("#create-author").val();
   const username = currentUser.username
-  const storyData = { title, url, author, username };
+  const storyData = {title, url, author, username };
 
   const story = await storyList.addStory(currentUser, storyData);
 
